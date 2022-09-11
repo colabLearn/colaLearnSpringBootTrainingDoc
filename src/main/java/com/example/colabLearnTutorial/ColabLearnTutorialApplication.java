@@ -1,6 +1,8 @@
 package com.example.colabLearnTutorial;
 import com.example.colabLearnTutorial.domain.Car;
 import com.example.colabLearnTutorial.domain.CarRepository;
+import com.example.colabLearnTutorial.domain.Owner;
+import com.example.colabLearnTutorial.domain.OwnerRepository;
 import lombok.Builder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.Arrays;
 
 @SpringBootApplication
 public class ColabLearnTutorialApplication  implements
@@ -18,18 +22,27 @@ public class ColabLearnTutorialApplication  implements
 
 	@Autowired
 	private CarRepository carRepository;
+	@Autowired
+	private OwnerRepository ownerRepository;
 	public static void main(String[] args) {
 		// After adding this comment the application should restart
 
 		SpringApplication.run(ColabLearnTutorialApplication.class, args);
 		//logger.info("Application started");
 	}
+
+
 	@Override
 	public void run (String...args) throws Exception {
+		//Add owner objects and save these to db
+		Owner owner1 = new Owner ("John", "Johnson");
+		Owner owner2 = new Owner ("Mary", "Robinson");
+		ownerRepository.saveAll(Arrays.asList(owner1,owner2));
+
 		//Place your code here
-		carRepository.save(new Car("Ford", "Mustang", "Red", "ADF-1121", 2021, 59000));
-		carRepository.save(new Car("Nissan", "Leaf", "White", "SSJ-3002", 2019, 29000));
-		carRepository.save(new Car("Toyota", "Prius", "Silver", "KKO-0212", 2020, 39000));
+		carRepository.save(new Car("Ford", "Mustang", "Red", "ADF-1121", 2021, 59000, owner1));
+		carRepository.save(new Car("Nissan", "Leaf", "White", "SSJ-3002", 2019, 29000, owner2));
+		carRepository.save(new Car("Toyota", "Prius", "Silver", "KKO-0212", 2020, 39000, owner2));
 
 		for (Car car :carRepository.findAll()){
 			logger.info(car.getBrand() +" " + car.getModel());
