@@ -1,45 +1,17 @@
 package com.example.colabLearnTutorial.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Data;
+
+import javax.persistence.*;
+
 
 @Entity
 public class Car {
-    public long getId() {
-        return id;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public String getRegisterNumber() {
-        return registerNumber;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String brand;
-    private String model;
+    private String brand, model, color, registerNumber;
+    private int year, price;
 
     public Car(String brand, String model, String color, String registerNumber, int year, int price) {
         this.brand = brand;
@@ -50,9 +22,8 @@ public class Car {
         this.price = price;
     }
 
-    private String color;
-    private String registerNumber;
-    private int year, price;
+    public Car() {
+    }
 
     public void setId(long id) {
         this.id = id;
@@ -81,9 +52,46 @@ public class Car {
     public void setPrice(int price) {
         this.price = price;
     }
-// Demonstrates how to use @Column annotation to define custom attributes for our database column
+
+    public long getId() {
+        return id;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public String getRegisterNumber() {
+        return registerNumber;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+//Demonstrates how to use @Column annotation to define custom attributes for our database column
     //@Column(name = "explanation", nullable = false, length = 512)
     //private String description;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner")
+    private Owner owner;
 
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
 
+    public Owner getOwner() {
+        return owner;
+    }
 }
