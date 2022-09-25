@@ -3,7 +3,7 @@ import com.example.colabLearnTutorial.domain.Car;
 import com.example.colabLearnTutorial.domain.CarRepository;
 import com.example.colabLearnTutorial.domain.Owner;
 import com.example.colabLearnTutorial.domain.OwnerRepository;
-import lombok.Builder;
+//import lombok.Builder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

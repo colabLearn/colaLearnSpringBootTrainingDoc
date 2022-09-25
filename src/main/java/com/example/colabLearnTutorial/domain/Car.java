@@ -1,8 +1,8 @@
 package com.example.colabLearnTutorial.domain;
 
-import lombok.Data;
-
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -13,7 +13,7 @@ public class Car {
     private String brand, model, color, registerNumber;
     private int year, price;
 
-    public Car(String brand, String model, String color, String registerNumber, int year, int price, Owner owner) {
+    public Car(String brand, String model, String color, String registerNumber, int year, int price, Owner owner){
         super();
         this.brand = brand;
         this.model = model;
@@ -21,7 +21,8 @@ public class Car {
         this.registerNumber = registerNumber;
         this.year = year;
         this.price = price;
-        this.owner= owner;
+        this.owner = owner;
+//        this.owners=Set.of(owners);
     }
 
     public Car() {
@@ -96,4 +97,15 @@ public class Car {
     public Owner getOwner() {
         return owner;
     }
+
+//    @ManyToMany(mappedBy = "cars")
+//    private Set<Owner> owners = new HashSet<Owner>();
+//
+//    public Set<Owner> getOwners() {
+//        return owners;
+//    }
+//
+//    public void setOwners(Set<Owner> owners) {
+//        this.owners = owners;
+//    }
 }

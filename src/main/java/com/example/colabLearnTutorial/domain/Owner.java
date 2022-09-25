@@ -3,6 +3,7 @@ package com.example.colabLearnTutorial.domain;
 import javax.persistence.*;
 import java.util.List;
 
+
 @Entity
 public class Owner {
     public Owner(String firstname, String lastname) {
@@ -53,4 +54,17 @@ public class Owner {
     public List<Car> getCars() {
         return cars;
     }
+//    @ManyToMany(cascade = CascadeType.PERSIST)
+//    @JoinTable (name = "car_owner",
+//    joinColumns = {@JoinColumn (name = "ownerid")},
+//    inverseJoinColumns = {@JoinColumn(name="id")})
+//    private Set<Car> cars = new HashSet<Car>();
+//
+//    public Set<Car> getCars() {
+//        return cars;
+//    }
+//
+//    public void setCars(Set<Car> cars) {
+//        this.cars = cars;
+//    }
 }
