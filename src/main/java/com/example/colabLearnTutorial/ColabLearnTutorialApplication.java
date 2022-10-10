@@ -1,25 +1,29 @@
 package com.example.colabLearnTutorial;
-import com.example.colabLearnTutorial.domain.Car;
-import com.example.colabLearnTutorial.domain.CarRepository;
-import com.example.colabLearnTutorial.domain.Owner;
-import com.example.colabLearnTutorial.domain.OwnerRepository;
+import com.example.colabLearnTutorial.domain.*;
 //import lombok.Builder;
+import com.example.colabLearnTutorial.web.carController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.util.Arrays;
+
 
 @SpringBootApplication
 public class ColabLearnTutorialApplication  implements
 		CommandLineRunner {
+
 	//Logs and Problem solving
 	private static final Logger logger =
 			LoggerFactory.getLogger(ColabLearnTutorialApplication.class);
 
+
+	@Autowired
+	private UserRepository useRepository;
 	@Autowired
 	private CarRepository carRepository;
 	@Autowired
@@ -48,7 +52,15 @@ public class ColabLearnTutorialApplication  implements
 			logger.info(car.getBrand() +" " + car.getModel());
 		}
 
+		//Username: user, password:user
+		useRepository.save(new User("user","$2a$10$xc0N/I5AVgT6koM5PLK0NutZNfGVqyvCgN.DYEDyRIwz4LmDg8HbG", "USER"));
+
+		//Username: admin, password: admin
+		useRepository.save(new User("admin","$2a$10$..4kK81dknqSlfDQTQjSwuHHRfOLsOND6ceXYukHd0kzWbZzoHk7e", "ADMIN"));
+
 	}
+
+
 
 
 }
